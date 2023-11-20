@@ -1,0 +1,36 @@
+.menu {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .menu li {
+    margin: 0 30px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+  }
+
+  .navBar a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .navBar {
+    border-bottom: 2px solid black; 
+  }
+
+  .flex-container {
+    display: flex;
+    justify-content: space-between; /* Esto distribuirá los elementos de manera uniforme */
+    margin: 30px;
+}
+h1{
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+}
+
+  
+  
+  
+  
