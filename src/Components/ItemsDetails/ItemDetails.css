@@ -1,0 +1,47 @@
+/* ItemDetail.css */
+
+.item-detail-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+  
+  .item-detail-image {
+    margin-right: 20px;
+  }
+  
+  .item-detail-image img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .item-detail-info {
+    text-align: left;
+  }
+  
+  .item-detail-info h2 {
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .item-detail-info h3 {
+    color: #555;
+    font-size: 18px;
+  }
+  
+  .item-detail-info button {
+    background-color: rebeccapurple;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .item-detail-info button:hover {
+    background-color: #872f79;
+  }
+  

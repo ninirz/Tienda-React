@@ -1,6 +1,7 @@
 // Item.jsx
 import React from 'react';
 import './Item.css';
+import { Link } from 'react-router-dom';
 
 function Item({ item }) {
   return (
@@ -10,9 +11,9 @@ function Item({ item }) {
         <h3>{item.producto}</h3>
         <p>{item.descripcion}</p>
         <p>Stock disponible: {item.stock}</p>
-        <button className="details-button" onClick={() => console.log(`Ver detalles de ${item.producto}`)}>
-          Ver detalles del producto
-        </button>
+        <Link to={`/mujeres/${item.id}`}>
+          <button className="details-button">Ver más detalles</button>
+        </Link>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div>
-            <FontAwesomeIcon icon={faShoppingCart} />
+            <NavLink to={"/cart"}><FontAwesomeIcon icon={faShoppingCart} /></NavLink>
             </div>
             </div>
         </nav> 
