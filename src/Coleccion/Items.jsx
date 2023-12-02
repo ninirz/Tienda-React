@@ -1,106 +1,16 @@
-// items.js
-export const productos = [
-    {
-      producto: 'Blusa Floral',
-      precio: 1299.99,
-      talla: 'M',
-      id: 1,
-      categoria: 'Mujeres',
-      stock: 2,
-      descripcion: 'Una hermosa blusa floral perfecta para cualquier ocasión.',
-    },
-    {
-      producto: 'Falda Midi',
-      precio: 899.50,
-      talla: 'S',
-      id: 2,
-      categoria: 'Mujeres',
-      stock: 2,
-      descripcion: 'Una elegante falda midi que realzará tu estilo.',
-    },
-    {
-      producto: 'Vestido de Verano',
-      precio: 1499.00,
-      talla: 'L',
-      id: 3,
-      categoria: 'Mujeres',
-      stock: 3,
-      descripcion: 'Un vestido ligero y fresco perfecto para los días soleados.',
-    },
-    {
-      producto: 'Camisa de Cuadros',
-      precio: 1199.99,
-      talla: 'M',
-      id: 4,
-      categoria: 'Hombres',
-      stock: 20,
-      descripcion: 'Una clásica camisa de cuadros para un look casual.',
-    },
-    {
-      producto: 'Pantalones Chinos',
-      precio: 999.50,
-      talla: 'L',
-      id: 5,
-      categoria: 'Hombres',
-      stock: 10,
-      descripcion: 'Pantalones chinos cómodos y versátiles para cualquier ocasión.',
-    },
-    {
-      producto: 'Chaqueta de Cuero',
-      precio: 2999.00,
-      talla: 'XL',
-      id: 6,
-      categoria: 'Hombres',
-      stock: 24,
-      descripcion: 'Una chaqueta de cuero resistente y con estilo para el invierno.',
-    },
-    {
-      producto: 'Collar Elegante',
-      precio: 499.99,
-      talla: 'Única',
-      id: 7,
-      categoria: 'Accesorios',
-      stock: 15,
-      descripcion: 'Un collar elegante para complementar tu look.',
-    },
-    {
-      producto: 'Sombrero de Verano',
-      precio: 799.50,
-      talla: 'Única',
-      id: 9,
-      categoria: 'Accesorios',
-      stock: 8,
-      descripcion: 'Un sombrero ligero y fresco para los días soleados.',
-    },
-    {
-      producto: 'Bolso de Cuero',
-      precio: 899.99,
-      talla: 'Única',
-      id: 10,
-      categoria: 'Accesorios',
-      stock: 12,
-      descripcion: 'Un elegante bolso de cuero para completar tu conjunto.',
-    },
-    {
-      producto: 'Gafas de Sol Vintage',
-      precio: 349.50,
-      talla: 'Única',
-      id: 11,
-      categoria: 'Accesorios',
-      stock: 18,
-      descripcion: 'Gafas de sol con un toque vintage para un estilo único.',
-    },
-    {
-      producto: 'Pulsera de Perlas',
-      precio: 199.99,
-      talla: 'Única',
-      id: 12,
-      categoria: 'Accesorios',
-      stock: 25,
-      descripcion: 'Una delicada pulsera de perlas para ocasiones especiales.',
-    },
-  ];  
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
-export function getItemById(id){
-    return productos.find((item) => item.id == id)
+export async function getItemById(id) {
+  try {
+    const db = getFirestore();
+    const itemCollection = collection(db, "items");
+    const querySnapshot = await getDocs(itemCollection);
+
+    // Mapear los documentos a los datos y devolver el elemento con el ID correspondiente
+    const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    return data.find((item) => item.id === id);
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+    return null;
+  }
 }

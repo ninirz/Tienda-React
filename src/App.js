@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import { productos } from './Coleccion/Items';
 
 //Pages
 import Home from './Pages/Home/Home';
@@ -25,9 +24,9 @@ function App() {
         <CarritoProvider>
           <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path='/mujeres' element={<Mujeres ropa={productos}/>}/>
-            <Route path='/hombres' element={<Hombres ropa={productos}/>}/>
-            <Route path='/accesorios' element={<Accesorios ropa={productos}/>}/>
+            <Route path='/mujeres' element={<Mujeres/>}/>
+            <Route path='/hombres' element={<Hombres/>}/>
+            <Route path='/accesorios' element={<Accesorios/>}/>
               <Route 
                 path='/mujeres/:itemId' 
                 element={<ItemDetail/>}/>

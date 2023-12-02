@@ -1,22 +1,33 @@
-// ItemList.jsx
 import React, { useEffect, useState } from 'react';
-import Item from './Item';
 import "./Item.css"
+import Item from './Item';
+import { getFirestore, collection, getDocs,query,where } from 'firebase/firestore'
 
-function ItemListContainer({ productList }) {
+function ItemListContainer() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      setTimeout(() => {
-        setItems(productList);
-        setLoading(false);
-      }, 3000);
-    };
+      try {
+        const db = getFirestore();
+        const myquery= query(collection(db,"items"),where("precio","<",1000))
+        const itemCollection = collection(db, "items");
+        const querySnapshot = await getDocs(itemCollection);
+
+        // Mapear los documentos a los datos y actualizar el estado
+        const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setItems(data);
+
+        setLoading(false); 
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+        setLoading(false); 
+      }
+  };
 
     fetchData();
-  }, [productList]);
+  }, []);
 
   return (
     <div className="card-container">

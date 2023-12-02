@@ -1,21 +1,37 @@
-import React, { useContext,useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getItemById } from "../../Coleccion/Items";
 import { CarritoContext } from "../../Context/CarritoContext";
 import ItemCount from "../Item/ItemCount";
-
-import "./ItemDetails.css"; 
+import { getItemById } from "../../Coleccion/Items";
+import "./ItemDetails.css";
 
 const ItemDetail = () => {
   const { itemId } = useParams();
-  const product = getItemById(itemId); // Busca el producto con esa Id
+  const [product, setProduct] = useState(null);
   const { agregarProducto } = useContext(CarritoContext);
   const [selectedQuantity, setSelectedQuantity] = useState(0);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const productData = await getItemById(itemId);
+      setProduct(productData);
+    };
+
+    fetchProduct();
+  }, [itemId]);
+
+  if (!product) {
+    return <p>Cargando...</p>;
+  }
 
   return (
     <div className="item-detail-container">
       <div className="item-detail-image">
-      <img src={`${process.env.PUBLIC_URL}/Img/logo.png`} alt={product.producto} className="item-image" />
+        <img
+          src={`${process.env.PUBLIC_URL}/Img/logo.png`}
+          alt={product.producto}
+          className="item-image"
+        />
       </div>
       <div className="item-detail-info">
         <h2>{product.producto}</h2>
