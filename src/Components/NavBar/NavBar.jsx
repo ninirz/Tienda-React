@@ -15,7 +15,7 @@ const NavBar = () => {
                 <div><FontAwesomeIcon icon={faSearch} /></div>
                 <div>
                     <ul className='menu'>
-                        <li><NavLink to={"/mujeres"}>MUJERES</NavLink></li>
+                        <li><NavLink to={"/mujeres"} >MUJERES</NavLink></li>
                         <li><NavLink to={"/hombres"}>HOMBRES</NavLink></li>
                         <li><NavLink to={"/accesorios"}>ACCESORIOS</NavLink></li>
                     </ul>

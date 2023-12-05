@@ -1,6 +1,7 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { CarritoContext } from "../../Context/CarritoContext";
 import { getFirestore, collection, doc,addDoc, updateDoc, writeBatch } from 'firebase/firestore'
+import { Placeholder } from "react-bootstrap";
 
 const buttonStyle = {
     backgroundColor: "rebeccapurple",
@@ -18,23 +19,44 @@ const Cart = () => {
     //Desestructuramos el objeto
     const {productosCarrito, eliminarProducto} = useContext(CarritoContext)
     //productoCarrito tendra el valor del contexto de CarritoContext
-
+    const [nombre,setNombre] = useState("Biniza")
+    const [email,setEmail] = useState("binizacruuiz@gmail.com")
+    const [numero,setNumero] = useState(9511868655)
     const db = getFirestore()
     const ordersCollection = collection(db,"orders")
 
     const crearOrden = () => {
+        const total = productosCarrito.reduce((acum,item) => acum + item.precio,0)
         const orderData = {
             buyer: {
-                name:"Juan",
-                phone: "9511868655",
-                email:"biniza@gmail.com"
+                name: nombre,
+                phone: numero,
+                email:email
             },
             items:[...productosCarrito],
-            total: 2000
+            total: total
         }
         const orderCollection = collection (db, "orders")
 
         addDoc(orderCollection, orderData).then(({id}) => console.log(id))
+    }
+
+    const actualizarOrdenPorLotes = () => {
+        const total = productosCarrito.reduce((acum,item) => acum + item.precio,0)
+        const Documento1 = doc(ordersCollection, "5fNK5bLgkPjva2g1uWNY")
+        const batch = writeBatch(db)
+
+        batch.set(Documento1, 
+            {buyer: {
+                name: nombre,
+                numero:numero,
+                email: email
+            },
+            items:[...productosCarrito],
+            total: total
+        })
+        
+        batch.commit()
     }
 
     
@@ -42,6 +64,9 @@ const Cart = () => {
         <div>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                 <h2>Cart</h2>
+                <h2>
+                    <input type={"text"} onChange={(e) =>setNombre(e.target.value)} placeholder='Nombre'></input>
+                </h2>
             </div>
             {
                 productosCarrito.length > 0 ?
@@ -61,7 +86,7 @@ const Cart = () => {
                 </div>
             }
             <button on onClick={crearOrden}>Comprar</button>
-            <button>Actualizar Documento</button>
+            <button on onClick={actualizarOrdenPorLotes}>Actualizar Documento</button>
         </div>
     );
 }

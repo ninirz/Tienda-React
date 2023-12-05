@@ -3,7 +3,7 @@ import "./Item.css"
 import Item from './Item';
 import { getFirestore, collection, getDocs,query,where } from 'firebase/firestore'
 
-function ItemListContainer() {
+function ItemListContainer({productList}) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,7 +12,7 @@ function ItemListContainer() {
       try {
         const db = getFirestore();
         const myquery= query(collection(db,"items"),where("precio","<",1000))
-        const itemCollection = collection(db, "items");
+        const itemCollection = collection(db, productList);
         const querySnapshot = await getDocs(itemCollection);
 
         // Mapear los documentos a los datos y actualizar el estado
