@@ -24,12 +24,17 @@ function App() {
         <CarritoProvider>
           <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path='/mujeres' element={<Mujeres ropa={"mujeres"}/>}/>
-            <Route path='/hombres' element={<Hombres ropa={"hombres"}/>}/>
-            <Route path='/accesorios' element={<Accesorios ropa={"accesorios"}/>}/>
+            <Route path='/mujeres' element={<Mujeres/>}/>
+            <Route path='/hombres' element={<Hombres/>}/>
+            <Route path='/accesorios' element={<Accesorios/>}/>
               <Route 
                 path='/mujeres/:itemId' 
-                element={<ItemDetail/>}/>
+                element={<ItemDetail/>}
+              />
+              <Route 
+                path='/hombres/:itemId' 
+                element={<ItemDetail/>}
+              />
               <Route
                 path='/cart'
                 element={

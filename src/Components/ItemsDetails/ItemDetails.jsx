@@ -40,8 +40,7 @@ const ItemDetail = () => {
         <h3>Precio: {product.precio}</h3>
         <ItemCount stock={product.stock} initial={1} onAdd={setSelectedQuantity} />
         <button
-          onClick={() => agregarProducto((oldData) => [...oldData, product])}
-        >
+          onClick={() => agregarProducto((oldData) => [...oldData, product])}>
           Agregar al carrito
         </button>
       </div>

@@ -1,11 +1,11 @@
 import React from "react";
 import ItemListContainer from "../../Components/Item/ItemList";
 
-function Mujeres({ ropa }) {
+function Mujeres() {
 
   return (
     <div>
-      <ItemListContainer productList={ropa} />
+      <ItemListContainer />
     </div>
   );
 }

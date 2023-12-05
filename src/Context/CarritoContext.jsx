@@ -2,8 +2,7 @@ import { createContext,useState} from "react";
 import { useEffect } from "react";
 
 export const CarritoContext = createContext() //Crear contexto
-
-export const CarritoProvider = ({children}) => { //Children son todos los elementos que lso pasemos en los {}
+export const CarritoProvider = ({children}) => { //Children son todos los elementos que los pasemos en los {}
     const [cart,setCart] = useState([])
 
     useEffect(() => {
@@ -17,7 +16,7 @@ export const CarritoProvider = ({children}) => { //Children son todos los elemen
       }
     
     return (
-        <CarritoContext.Provider value={{productosCarrito: cart, agregarProducto:setCart, eliminarProducto}}> {/*Todos los que esten dentor tendran acceso a la info del carrito*/}
+        <CarritoContext.Provider value={{productosCarrito: cart, agregarProducto:setCart, eliminarProducto}}> {/*Todos los que esten dentro tendran acceso a la info del carrito*/}
             {children}
         </CarritoContext.Provider>
     )
